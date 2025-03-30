@@ -4,7 +4,7 @@ pipeline {
         stage('checkout') {
             steps {
                 script {
-                    echo "checkout"
+                    print "checkout"
                     checkout([
                         $class: 'GitSCM',
                         branches: [[name: '*/main']],
@@ -13,8 +13,15 @@ pipeline {
                             url: 'https://github.com/thiphop/403.git'
                         ]]
                     ])
-                    echo "checkoutSuc"
+                    print "checkoutSuccess"
                 }
+            }
+        }
+
+        stage('testRobot') {
+            steps {
+                sh 'pip install robotframework'
+                print "install Success"
             }
         }
     }
