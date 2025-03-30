@@ -1,24 +1,18 @@
 pipeline {
     agent any
     stages {
-        stage('Clone') {
+        stage('checkout') {
             steps {
-                print "clone"
-            }
-        }
-        stage('Build') {
-            steps {
-                print "Build"
-            }
-        }
-        stage('Deploy') {
-            steps {
-                print "Deploy"
-            }
-        }
-        stage('Test') {
-            steps {
-                print "Test"
+                print "checkout"
+                checkout([
+                    $class: 'GitSCM'
+                branches: [['*/main']]
+                useRemoteConigs: [ [
+                    credentialsId: 'ThophopPhe',
+                    url: 'https://github.com/thiphop/403.git'
+                ]]
+                ])
+                print "checkoutSuc"
             }
         }
     }
